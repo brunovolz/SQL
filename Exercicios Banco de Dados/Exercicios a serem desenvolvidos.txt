@@ -1,0 +1,11 @@
+Em um novo banco de dados
+
+1 - Elaborar um sistema de boletim escolar que deverá conter as notas de varios alunos, 
+pelo menos 5 matriculados em uma turma, ou seja, temos alunos e eles estão registrados em uma turma, 
+os alunos conterão 4 notas dentro do sistema, os alunos precisam ter registros de 4 dias de frequencia,
+sendo que a frequencia não pode ser inferior a 75% para o mesmo ser identificado como aprovado.
+
+1.1 - Devemos ter as tabelas e os registros.
+1.1.1 - Scripts de criação
+1.2 - Devemos retornar as informações da frequencia e se os alunos estão aprovados.
+1.2.1 - Scripts de visualização

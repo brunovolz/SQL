@@ -1,0 +1,121 @@
+CREATE DATABASE BoletimBrunoVolz;
+go
+USE BoletimBrunoVolz;
+go
+CREATE TABLE [dbo].[Aluno] (
+    [Id]    INT           IDENTITY (1, 1) NOT NULL,
+    [Aluno] VARCHAR (100) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+go
+CREATE TABLE [dbo].[Nota] (
+    [Id]    INT IDENTITY (1, 1) NOT NULL,
+    [Aluno] INT NOT NULL,
+    [Nota1] INT NOT NULL,
+    [Nota2] INT NOT NULL,
+    [Nota3] INT NOT NULL,
+    [Nota4] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Nota_AlunoNota] FOREIGN KEY ([Aluno]) REFERENCES [dbo].[Aluno] ([Id])
+);
+go
+CREATE TABLE [dbo].[Frequencia] (
+    [Id]    INT IDENTITY (1, 1) NOT NULL,
+    [Aluno] INT NOT NULL,
+    [Dia1]  INT NOT NULL,
+    [Dia2]  INT NOT NULL,
+    [Dia3]  INT NOT NULL,
+    [Dia4]  INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Frequencia_Alunos] FOREIGN KEY ([Aluno]) REFERENCES [dbo].[Aluno] ([Id])
+);
+go
+insert into Aluno
+(Aluno)
+values
+('Bruno');
+go
+insert into Aluno
+(Aluno)
+values
+('Adrielle');
+go
+insert into Aluno
+(Aluno)
+values
+('Breno');
+go
+insert into Aluno
+(Aluno)
+values
+('Vitor');
+go
+insert into Aluno
+(Aluno)
+values
+('William');
+go
+insert into Frequencia
+(Aluno,dia1,dia2,dia3,dia4)
+values
+(1,1,1,1,0);
+go
+insert into Frequencia
+(Aluno,dia1,dia2,dia3,dia4)
+values
+(2,1,1,1,1);
+go
+insert into Frequencia
+(Aluno,dia1,dia2,dia3,dia4)
+values
+(3,0,0,1,1);
+go
+insert into Frequencia
+(Aluno,dia1,dia2,dia3,dia4)
+values
+(4,0,1,1,1);
+go
+insert into Frequencia
+(Aluno,dia1,dia2,dia3,dia4)
+values
+(5,0,0,0,1);
+go
+insert into Nota
+(Aluno,Nota1,Nota2,Nota3,Nota4)
+values
+(1,7,8,2,10);
+go
+insert into Nota
+(Aluno,Nota1,Nota2,Nota3,Nota4)
+values
+(2,1,7,1,10);
+go
+insert into Nota
+(Aluno,Nota1,Nota2,Nota3,Nota4)
+values
+(3,0,10,1,1);
+go
+insert into Nota
+(Aluno,Nota1,Nota2,Nota3,Nota4)
+values
+(4,3,4,4,6);
+go
+insert into Nota
+(Aluno,Nota1,Nota2,Nota3,Nota4)
+values
+(5,10,6,7,8);
+go
+
+select 
+	a.Aluno as 'Nome do Aluno',
+	n.nota1 as 'Nota 1',
+	n.nota2 as 'Nota 2',
+	n.nota3 as 'Nota 3',
+	n.nota4 as 'Nota 4',
+	((n.nota1 + n.nota2 + n.nota3 + n.nota4)/4) as 'Media',
+	concat (((f.dia1 +f.dia2+f.dia3+f.dia4)*100)/4,'%') as 'Frequencia',
+	iif  ((((n.nota1 + n.nota2 + n.nota3 + n.nota4)/4) >= 7)
+	and (((f.dia1 +f.dia2+f.dia3+f.dia4)*100)/4) >= 75,'Aprovado','Reprovado') as 'Status'
+	from nota n
+	inner join Aluno a on n.Aluno = a.id
+	inner join Frequencia f on n.Aluno = f.Aluno

@@ -1,0 +1,146 @@
+select Nome 
+from Marcas
+where UsuInc = 1;
+
+select Nome
+from Marcas
+where UsuInc = 2;
+
+select Nome
+from Marcas
+where UsuInc = 1
+order by id desc;
+
+select Nome
+from Marcas
+where UsuInc = 2
+order by id asc;
+
+select count(Nome) as 'Quantidade'
+from Marcas
+where UsuInc = 1 or UsuInc = 2;
+
+select Modelo 
+from Carros
+where UsuInc = 1;
+
+select Modelo
+from Carros
+where UsuInc = 2;
+
+select Modelo
+from Carros
+where UsuInc = 1
+order by Id desc;
+
+select Modelo
+from Carros
+where UsuInc = 2
+order by Id asc;
+
+select 
+count(Modelo) as 'Quantidade'
+from Carros
+where UsuInc = 2 or UsuInc = 1;
+
+select  ca.Marca,
+	ca.Modelo
+from marcas ma
+	inner join Carros ca on ma.Id = ca.Marca
+where ca.UsuInc = 1;
+
+select  ca.Marca,
+	ca.Modelo
+from marcas ma
+	inner join Carros ca on ma.Id = ca.Marca
+where ca.UsuInc = 2;
+
+select  ma.Id as 'Marca',
+		count(ca.Marca) as 'Quantidade de carros'
+from marcas ma
+	inner join Carros ca on ma.Id = ca.Marca
+where ca.UsuInc = 1
+group by ma.Id
+order by ma.ID desc;
+
+select  ma.Id as 'Marca',
+	count(ca.Marca) as 'Quantidade de carros'
+from marcas ma
+	inner join Carros ca on ma.Id = ca.Marca
+where ca.UsuInc = 2
+group by ma.Id
+order by ma.ID asc;
+
+select  sum(valor) as ' Valor de vendas em 2019'
+from Vendas
+where year(DatInc) = '2019';
+
+select  sum(Quantidade) as 'Quantidade de vendas em 2019'
+from Vendas
+where year(DatInc) = '2019';
+
+select  sum(valor)' Total de vendas',
+	year(datinc) as 'Ano'
+from Vendas
+group by year(datinc)
+order by sum(Valor) desc;
+
+select  sum(Quantidade) as 'Quantidade de vendas',
+	year(datinc) as 'Ano'
+from Vendas
+group by year(datinc)
+order by sum(Quantidade) desc;
+
+select  sum(Quantidade) as 'Quantidade de vendas',
+	month(datinc) as 'Mês',
+	year(datinc) as 'Ano'
+from Vendas
+group by year(datinc),month(datinc)
+order by sum(Quantidade) desc;
+
+select  sum(Valor) as 'Total de vendas',
+	month(datinc) as 'Mês',
+	year(datinc) as 'Ano'
+from Vendas
+group by year(datinc),month(datinc)
+order by sum(Valor) desc;
+
+select  sum(Valor) as 'Total de vendas',
+	month(datinc) as 'Mês',
+	year(datinc) as 'Ano'
+from Vendas
+group by year(datinc),month(datinc)
+order by sum(Valor) desc;
+
+select  sum(Valor) as 'Total de vendas'
+from Vendas
+where UsuInc = 1 ;
+
+select  sum(Valor) as 'Total de vendas'
+from Vendas
+where UsuInc = 2;
+
+select  sum(Quantidade) as 'Quantidade total de vendas'
+from Vendas
+where UsuInc = 1;
+
+select  sum(Quantidade) as 'Quantidade total de vendas'
+from Vendas
+where UsuInc = 2;
+
+select  sum(Quantidade) as 'Quantidade total de vendas'
+from Vendas
+order by sum(Quantidade) desc;
+
+select  sum(Valor) as 'Total de vendas'
+from Vendas
+order by sum(Valor) desc;
+
+select  sum(v.Quantidade) as 'Quantidade vendida',
+	m.Nome as 'Marca'
+from Marcas m
+	inner join carros ca on m.Id = ca.Marca
+	inner join Vendas v on ca.Id = v.Quantidade
+	group by m.Nome
+	order by sum(v.Quantidade) desc
+

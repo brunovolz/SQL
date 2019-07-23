@@ -142,5 +142,12 @@ from Marcas m
 	inner join carros ca on m.Id = ca.Marca
 	inner join Vendas v on ca.Id = v.Quantidade
 	group by m.Nome
-	order by sum(v.Quantidade) desc
+	order by sum(v.Quantidade) desc;
 
+select  sum(v.Valor) as 'Valor total',
+	m.Nome as 'Marca'
+from Marcas m
+	inner join carros ca on m.Id = ca.Marca
+	inner join Vendas v on ca.Id = v.Valor
+	group by m.Nome
+	order by sum(v.Valor) desc

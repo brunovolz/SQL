@@ -136,11 +136,11 @@ select  sum(Valor) as 'Total de vendas'
 from Vendas
 order by sum(Valor) desc;
 
-select  sum(v.Quantidade) as 'Quantidade vendida',
+select  sum(v.Quantidade) as 'Valor total',
 	m.Nome as 'Marca'
 from Marcas m
 	inner join carros ca on m.Id = ca.Marca
-	inner join Vendas v on ca.Id = v.Quantidade
+	inner join Vendas v on ca.Id = v.Carro
 	group by m.Nome
 	order by sum(v.Quantidade) desc;
 
@@ -148,6 +148,21 @@ select  sum(v.Valor) as 'Valor total',
 	m.Nome as 'Marca'
 from Marcas m
 	inner join carros ca on m.Id = ca.Marca
-	inner join Vendas v on ca.Id = v.Valor
+	inner join Vendas v on ca.Id = v.Carro
 	group by m.Nome
-	order by sum(v.Valor) desc
+	order by sum(v.Valor) desc;
+
+select  sum(v.Quantidade) as 'Valor total',
+	ca.Modelo as 'Carro'
+from Marcas m
+	inner join carros ca on m.Id = ca.Marca
+	inner join Vendas v on ca.Id = v.Carro
+	group by ca.Modelo
+	order by sum(v.Quantidade) desc;
+
+select  sum(v.Valor * v.Quantidade) as 'Valor',
+	ca.Modelo as 'Carro'
+from Carros ca
+	inner join Vendas v on ca.Id = v.Carro
+	group by ca.Modelo
+	order by sum(v.Quantidade) desc;
